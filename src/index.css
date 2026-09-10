@@ -78,3 +78,19 @@ a { color: inherit; }
   font-weight: 600;
   cursor: pointer;
 }
+
+.day-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 14px 2px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.day-heading:first-child {
+  padding-top: 2px;
+}
