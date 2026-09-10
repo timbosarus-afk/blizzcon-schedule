@@ -103,6 +103,23 @@
   font-weight: 600;
 }
 
+.event-tag-custom {
+  color: #3ECF7A;
+  background: rgba(62, 207, 122, 0.14);
+  border-color: rgba(62, 207, 122, 0.4);
+  font-weight: 600;
+}
+
+.event-delete {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #FF8A8A;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .live-dot {
   width: 6px;
   height: 6px;
