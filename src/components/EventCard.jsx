@@ -1,0 +1,80 @@
+import { useState } from 'react';
+import { formatTimeRange, isPast } from '../utils/time';
+import './EventCard.css';
+
+const STAGE_LABELS = {
+  main: 'Main Stage',
+  legends: 'Legends Stage',
+  owcup: 'Overwatch World Cup Arena',
+  wow: 'World of Warcraft Stage',
+  hearthstone: 'Hearthstone Stage',
+  classiccup: 'Classic Cup Stage',
+  diablo: 'Diablo Stage',
+};
+
+export default function EventCard({ event, isFavorite, isClash, note, onToggleFavorite, onSaveNote }) {
+  const [editingNote, setEditingNote] = useState(false);
+  const [draft, setDraft] = useState(note || '');
+  const past = isPast(event.end_time);
+
+  return (
+    <div className={`event-card category-${event.category} ${isFavorite ? 'is-favorite' : ''} ${past ? 'is-past' : ''}`}>
+      <div className="event-card-bar" />
+      <div className="event-card-body">
+        <div className="event-card-top">
+          <span className="event-time">{formatTimeRange(event.start_time, event.end_time)}</span>
+          <span className="event-stage">{STAGE_LABELS[event.stage] || event.stage}</span>
+        </div>
+        <h3 className="event-title">{event.title}</h3>
+        <div className="event-card-meta">
+          {event.in_room_only && <span className="event-tag">In-room experience only</span>}
+          {isClash && <span className="event-tag event-tag-clash">Clashes with another favorite</span>}
+        </div>
+
+        {isFavorite && (
+          <div className="event-note">
+            {editingNote ? (
+              <div className="event-note-edit">
+                <input
+                  autoFocus
+                  value={draft}
+                  placeholder="e.g. meeting Sam by the entrance"
+                  onChange={(e) => setDraft(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      onSaveNote(draft);
+                      setEditingNote(false);
+                    }
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    onSaveNote(draft);
+                    setEditingNote(false);
+                  }}
+                >
+                  Save
+                </button>
+              </div>
+            ) : note ? (
+              <button className="event-note-display" onClick={() => setEditingNote(true)}>
+                📝 {note}
+              </button>
+            ) : (
+              <button className="event-note-add" onClick={() => setEditingNote(true)}>
+                + Add note
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+      <button
+        className="event-fav-btn"
+        aria-label={isFavorite ? 'Remove from my schedule' : 'Add to my schedule'}
+        onClick={onToggleFavorite}
+      >
+        {isFavorite ? '★' : '☆'}
+      </button>
+    </div>
+  );
+}
