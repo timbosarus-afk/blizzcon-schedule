@@ -2,11 +2,15 @@
 // general layout only - no artwork, icons, or branding reproduced).
 // `desc` marked (est.) is a reasonable guess at what the spot is, not a
 // confirmed fact - the map itself only gives names, not descriptions.
+// `shape` gives each area's rough position/size for the schematic map view,
+// approximating the real layout (halls in a row, arena to the east, north
+// hall up top via skybridge) - not a traced copy of the official artwork.
 
 export const VENUE_DIRECTORY = [
   {
     id: 'hallE',
     name: 'Hall E',
+    shape: { type: 'rect', x: 10, y: 340, w: 130, h: 180 },
     items: [
       { name: 'Registration', desc: 'Badge pickup and on-site registration' },
       { name: 'Cosplay Lounge', desc: 'Rest and prep space for cosplayers (est.)' },
@@ -15,6 +19,7 @@ export const VENUE_DIRECTORY = [
   {
     id: 'hallD',
     name: 'Hall D \u2014 Main Stage',
+    shape: { type: 'rect', x: 150, y: 260, w: 150, h: 260 },
     items: [
       { name: 'Main Stage', desc: 'Opening Ceremony, WoW/Diablo/Overwatch panels, Community Night', stageId: 'main' },
       { name: 'Buzzard Exhibits', desc: 'Community/fan exhibit displays (est.)' },
@@ -25,6 +30,7 @@ export const VENUE_DIRECTORY = [
   {
     id: 'hallC',
     name: 'Hall C \u2014 World of Warcraft Stage',
+    shape: { type: 'rect', x: 310, y: 280, w: 140, h: 220 },
     items: [
       { name: 'World of Warcraft Stage', desc: 'WoW panels, MDI Grand Finals, AWC Grand Finals', stageId: 'wow' },
       { name: 'World of Warcraft Demo', desc: 'Hands-on WoW demo stations' },
@@ -42,6 +48,7 @@ export const VENUE_DIRECTORY = [
   {
     id: 'hallB',
     name: 'Hall B \u2014 Hearthstone Stage',
+    shape: { type: 'rect', x: 460, y: 280, w: 140, h: 220 },
     items: [
       { name: 'Hearthstone Stage', desc: 'Hearthstone World Championship and panels', stageId: 'hearthstone' },
       { name: 'Hearthstone Demo', desc: 'Hands-on Hearthstone demo stations' },
@@ -60,6 +67,7 @@ export const VENUE_DIRECTORY = [
   {
     id: 'hallA',
     name: 'Hall A \u2014 Classic Cup Stage',
+    shape: { type: 'rect', x: 610, y: 260, w: 140, h: 240 },
     items: [
       { name: 'Classic Cup Stage', desc: 'Classic Cup esports: WC3, StarCraft, HotS', stageId: 'classiccup' },
       { name: 'Arcade Collection Demo', desc: 'Playable classic Blizzard arcade titles (est.)' },
@@ -74,34 +82,43 @@ export const VENUE_DIRECTORY = [
   {
     id: 'arena',
     name: 'Arena \u2014 Overwatch World Cup',
+    shape: { type: 'circle', cx: 860, cy: 350, r: 115 },
     items: [
       { name: 'Overwatch World Cup Arena', desc: 'OWCS quarterfinals through finals', stageId: 'owcup' },
-      { name: 'Arena Plaza', desc: 'Open plaza surrounding the arena' },
-      { name: 'Access to Quiet Room', desc: 'Sensory-friendly quiet space' },
-      { name: 'Food Trucks', desc: 'Food trucks' },
       { name: 'Hammerdown Challenge', desc: 'Overwatch community challenge activity (est.)' },
       { name: 'Omnic Oracle', desc: 'Overwatch-themed activity or photo installation (est.)' },
       { name: '10-Year Anniversary Activation', desc: "Exhibit for Overwatch's 10th anniversary" },
       { name: 'Overwatch Merch Trailer', desc: 'Overwatch-branded merch trailer' },
-      { name: 'BlizzCon Merch Kiosk', desc: 'Satellite merchandise stand' },
-      { name: 'Tea House Lounge', desc: 'Themed lounge/rest area (est.)' },
       { name: 'MEKA Photo Op', desc: 'Overwatch-themed photo installation' },
     ],
   },
   {
-    id: 'level1',
-    name: 'Level 1 (near Grand Plaza)',
+    id: 'arenaPlaza',
+    name: 'Arena Plaza',
+    shape: { type: 'rect', x: 770, y: 490, w: 180, h: 60 },
     items: [
+      { name: 'Access to Quiet Room', desc: 'Sensory-friendly quiet space' },
+      { name: 'Food Trucks', desc: 'Food trucks' },
+      { name: 'BlizzCon Merch Kiosk', desc: 'Satellite merchandise stand' },
+      { name: 'Tea House Lounge', desc: 'Themed lounge/rest area (est.)' },
+    ],
+  },
+  {
+    id: 'level1',
+    name: 'Level 1 Plaza (Grand Plaza)',
+    shape: { type: 'rect', x: 150, y: 550, w: 600, h: 70 },
+    items: [
+      { name: 'Grand Plaza Fountain', desc: 'Central outdoor plaza landmark' },
       { name: 'Jackson Guitar', desc: 'Sponsor guitar showcase' },
       { name: 'Guest Services', desc: 'General attendee help desk' },
       { name: 'Fanta', desc: 'Sponsor beverage activation' },
       { name: 'Service Awards', desc: 'Blizzard employee service awards display (est.)' },
-      { name: 'Grand Plaza Fountain', desc: 'Central outdoor plaza landmark' },
     ],
   },
   {
     id: 'level2',
     name: 'Level 2 \u2014 North Hall (via skybridge)',
+    shape: { type: 'rect', x: 690, y: 40, w: 160, h: 90 },
     items: [
       { name: 'Legends Stage', desc: 'Developer panels and community talks', stageId: 'legends' },
       { name: 'Portfolio & Resume Reviews', desc: 'Career development sessions' },
@@ -111,6 +128,7 @@ export const VENUE_DIRECTORY = [
   {
     id: 'darkmoon',
     name: 'Darkmoon Faire (North Hall)',
+    shape: { type: 'rect', x: 870, y: 40, w: 150, h: 110 },
     items: [
       { name: 'Duck Pond', desc: 'Classic carnival game' },
       { name: 'Face Painting', desc: 'Face painting activity' },
@@ -126,11 +144,13 @@ export const VENUE_DIRECTORY = [
   {
     id: 'merchstore',
     name: 'North Hall \u2014 Merch Store',
+    shape: { type: 'rect', x: 870, y: 160, w: 150, h: 80 },
     items: [{ name: 'BlizzCon Merch Store', desc: 'Main official merchandise store' }],
   },
   {
     id: 'amenities',
     name: 'General Amenities',
+    shape: null, // venue-wide, not a single spot - shown as a list, not a map region
     items: [
       { name: 'First Aid', desc: 'Medical assistance points throughout the venue' },
       { name: 'Restrooms', desc: 'Restrooms throughout the venue' },
