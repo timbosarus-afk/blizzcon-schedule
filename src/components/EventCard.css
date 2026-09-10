@@ -181,7 +181,7 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 6px 8px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .event-note-edit button {
