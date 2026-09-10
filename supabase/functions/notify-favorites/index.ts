@@ -1,6 +1,6 @@
 // Runs on a 5-minute cron (see supabase/cron.sql). For every favorited event
-// starting soon, sends a web push at each alert threshold (30/15/5 min
-// before) that hasn't already fired for that event.
+// (official or custom/personal) starting soon, sends a web push at each
+// alert threshold (30/15/5 min before) that hasn't already fired.
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import webpush from 'npm:web-push@3.6.7';
 
@@ -37,14 +37,29 @@ Deno.serve(async (req) => {
     const windowStart = new Date(now.getTime() + (threshold - WINDOW_PAD_MIN) * 60 * 1000).toISOString();
     const windowEnd = new Date(now.getTime() + (threshold + WINDOW_PAD_MIN) * 60 * 1000).toISOString();
 
-    const { data: events, error: evError } = await supabase
+    // Official schedule events.
+    const { data: officialEvents, error: evError } = await supabase
       .from('blizzcon_events')
-      .select('*')
+      .select('id, title, start_time, stage')
       .in('id', favIds)
       .gte('start_time', windowStart)
       .lte('start_time', windowEnd);
     if (evError) return new Response(JSON.stringify({ error: evError.message }), { status: 500 });
-    if (!events || events.length === 0) continue;
+
+    // Custom/personal events (meet & greets, streaming sessions, etc).
+    const { data: customEvents, error: customError } = await supabase
+      .from('blizzcon_custom_events')
+      .select('id, title, start_time, location')
+      .in('id', favIds)
+      .gte('start_time', windowStart)
+      .lte('start_time', windowEnd);
+    if (customError) return new Response(JSON.stringify({ error: customError.message }), { status: 500 });
+
+    const events = [
+      ...(officialEvents ?? []).map((e) => ({ ...e, place: e.stage })),
+      ...(customEvents ?? []).map((e) => ({ ...e, place: e.location || 'your schedule' })),
+    ];
+    if (events.length === 0) continue;
 
     const { data: alreadyNotified } = await supabase
       .from('blizzcon_notified_events')
@@ -62,7 +77,7 @@ Deno.serve(async (req) => {
       const mins = Math.round((new Date(event.start_time).getTime() - now.getTime()) / 60000);
       const payload = JSON.stringify({
         title: event.title,
-        body: `Starts in ${mins} min \u00b7 ${event.stage}`,
+        body: `Starts in ${mins} min \u00b7 ${event.place}`,
         tag: `${event.id}-${threshold}`,
         url: '/',
       });
