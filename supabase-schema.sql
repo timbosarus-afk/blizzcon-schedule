@@ -62,3 +62,19 @@ create policy "anon full access" on blizzcon_favorites for all using (true) with
 create policy "anon full access" on blizzcon_push_subscriptions for all using (true) with check (true);
 create policy "anon read" on blizzcon_notified_events for select using (true);
 create policy "anon full access" on blizzcon_shares for all using (true) with check (true);
+
+-- User-added personal events (meet & greets, streaming sessions, anything
+-- not on the official printed schedule but with a known time). These merge
+-- into the same schedule/favorites/notification pipeline as official events.
+create table if not exists blizzcon_custom_events (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  day date not null,
+  start_time timestamptz not null,
+  end_time timestamptz not null,
+  location text,
+  created_at timestamptz not null default now()
+);
+
+alter table blizzcon_custom_events enable row level security;
+create policy "anon full access" on blizzcon_custom_events for all using (true) with check (true);
