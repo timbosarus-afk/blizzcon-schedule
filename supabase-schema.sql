@@ -34,11 +34,13 @@ create table if not exists blizzcon_push_subscriptions (
   created_at timestamptz not null default now()
 );
 
--- Tracks which 30-minute alerts have already been sent, so the cron sweep
--- (running every 5 min) never double-fires a notification.
+-- Tracks which alert thresholds (30/15/5 min) have already fired per event,
+-- so the cron sweep (running every 5 min) never double-fires the same alert.
 create table if not exists blizzcon_notified_events (
-  event_id text primary key,
-  notified_at timestamptz not null default now()
+  event_id text not null,
+  threshold_minutes integer not null,
+  notified_at timestamptz not null default now(),
+  primary key (event_id, threshold_minutes)
 );
 
 -- Share tokens: lets Tim generate a read-only link to his favorited schedule
