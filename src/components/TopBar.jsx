@@ -16,9 +16,6 @@ export default function TopBar({ day, setDay, view, setView, days }) {
           <button className={view === 'mine' ? 'active' : ''} onClick={() => setView('mine')}>
             Mine
           </button>
-          <button className={view === 'map' ? 'active' : ''} onClick={() => setView('map')}>
-            Map
-          </button>
         </div>
       </div>
 
