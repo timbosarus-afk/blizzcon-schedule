@@ -17,6 +17,7 @@
   --c-hearthstone: #D98C2B;
   --c-classic: #3E8CD1;
   --c-blizzard: #9AA5C0;
+  --c-custom: #3ECF7A;
 
   --radius: 10px;
   --font-display: 'Barlow Condensed', sans-serif;
@@ -60,3 +61,20 @@ a { color: inherit; }
 .category-hearthstone { --cat: var(--c-hearthstone); }
 .category-classic { --cat: var(--c-classic); }
 .category-blizzard { --cat: var(--c-blizzard); }
+.category-custom { --cat: var(--c-custom); }
+
+.add-event-trigger-row {
+  padding: 8px 16px 0;
+}
+
+.add-event-trigger {
+  width: 100%;
+  background: var(--bg-raised);
+  border: 1px dashed var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  padding: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
