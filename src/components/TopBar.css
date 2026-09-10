@@ -2,11 +2,22 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  padding: calc(env(safe-area-inset-top) + 24px) 16px 0;
+  border-bottom: 1px solid var(--border);
+  isolation: isolate;
+}
+
+/* Blur lives on its own layer behind the text, never on the same element
+   as the text itself - some WebKit versions blur an element's own content
+   when backdrop-filter and a semi-transparent background sit together. */
+.topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: rgba(12, 17, 32, 0.98);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  padding: calc(env(safe-area-inset-top) + 14px) 16px 0;
+  z-index: -1;
 }
 
 .topbar-title {
