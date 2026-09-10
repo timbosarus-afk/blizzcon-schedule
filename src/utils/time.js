@@ -38,6 +38,11 @@ export function isPast(endISO) {
   return new Date(endISO).getTime() < Date.now();
 }
 
+export function isLive(startISO, endISO) {
+  const now = Date.now();
+  return new Date(startISO).getTime() <= now && now < new Date(endISO).getTime();
+}
+
 export function minutesUntil(startISO) {
   return Math.round((new Date(startISO).getTime() - Date.now()) / 60000);
 }
