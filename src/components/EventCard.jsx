@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { formatTimeRange, isPast } from '../utils/time';
+import { formatTimeRange, isPast, isLive } from '../utils/time';
 import './EventCard.css';
 
 const STAGE_LABELS = {
@@ -16,9 +16,12 @@ export default function EventCard({ event, isFavorite, isClash, note, onToggleFa
   const [editingNote, setEditingNote] = useState(false);
   const [draft, setDraft] = useState(note || '');
   const past = isPast(event.end_time);
+  const live = !past && isLive(event.start_time, event.end_time);
 
   return (
-    <div className={`event-card category-${event.category} ${isFavorite ? 'is-favorite' : ''} ${past ? 'is-past' : ''}`}>
+    <div
+      className={`event-card category-${event.category} ${isFavorite ? 'is-favorite' : ''} ${past ? 'is-past' : ''} ${live ? 'is-live' : ''}`}
+    >
       <div className="event-card-bar" />
       <div className="event-card-body">
         <div className="event-card-top">
@@ -27,6 +30,11 @@ export default function EventCard({ event, isFavorite, isClash, note, onToggleFa
         </div>
         <h3 className="event-title">{event.title}</h3>
         <div className="event-card-meta">
+          {live && (
+            <span className="event-tag event-tag-live">
+              <span className="live-dot" /> Happening now
+            </span>
+          )}
           {event.in_room_only && <span className="event-tag">In-room experience only</span>}
           {isClash && <span className="event-tag event-tag-clash">Clashes with another favorite</span>}
         </div>
