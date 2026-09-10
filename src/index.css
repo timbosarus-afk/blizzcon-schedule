@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0C1120;
+  --bg-raised: #141B30;
+  --surface: #1A2240;
+  --surface-hover: #212A4C;
+  --border: #2C3557;
+  --text: #EEF0F7;
+  --text-muted: #8B93B0;
+  --text-dim: #5C6485;
+  --accent: #E3B23C;
+
+  --c-warcraft: #E3B23C;
+  --c-overwatch: #F0631F;
+  --c-diablo: #D42B38;
+  --c-hearthstone: #D98C2B;
+  --c-classic: #3E8CD1;
+  --c-blizzard: #9AA5C0;
+
+  --radius: 10px;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(227, 178, 60, 0.08), transparent);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+button, input, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--accent); color: #1a1200; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.category-warcraft { --cat: var(--c-warcraft); }
+.category-overwatch { --cat: var(--c-overwatch); }
+.category-diablo { --cat: var(--c-diablo); }
+.category-hearthstone { --cat: var(--c-hearthstone); }
+.category-classic { --cat: var(--c-classic); }
+.category-blizzard { --cat: var(--c-blizzard); }
