@@ -12,11 +12,12 @@ const STAGE_LABELS = {
   diablo: 'Diablo Stage',
 };
 
-export default function EventCard({ event, isFavorite, isClash, note, onToggleFavorite, onSaveNote }) {
+export default function EventCard({ event, isFavorite, isClash, note, onToggleFavorite, onSaveNote, onDelete }) {
   const [editingNote, setEditingNote] = useState(false);
   const [draft, setDraft] = useState(note || '');
   const past = isPast(event.end_time);
   const live = !past && isLive(event.start_time, event.end_time);
+  const stageLabel = event.isCustom ? event.location || 'Personal event' : STAGE_LABELS[event.stage] || event.stage;
 
   return (
     <div
@@ -26,7 +27,7 @@ export default function EventCard({ event, isFavorite, isClash, note, onToggleFa
       <div className="event-card-body">
         <div className="event-card-top">
           <span className="event-time">{formatTimeRange(event.start_time, event.end_time)}</span>
-          <span className="event-stage">{STAGE_LABELS[event.stage] || event.stage}</span>
+          <span className="event-stage">{stageLabel}</span>
         </div>
         <h3 className="event-title">{event.title}</h3>
         <div className="event-card-meta">
@@ -35,6 +36,7 @@ export default function EventCard({ event, isFavorite, isClash, note, onToggleFa
               <span className="live-dot" /> Happening now
             </span>
           )}
+          {event.isCustom && <span className="event-tag event-tag-custom">Your event</span>}
           {event.in_room_only && <span className="event-tag">In-room experience only</span>}
           {isClash && <span className="event-tag event-tag-clash">Clashes with another favorite</span>}
         </div>
@@ -74,6 +76,12 @@ export default function EventCard({ event, isFavorite, isClash, note, onToggleFa
               </button>
             )}
           </div>
+        )}
+
+        {event.isCustom && onDelete && (
+          <button className="event-delete" onClick={() => onDelete(event.id)}>
+            Remove
+          </button>
         )}
       </div>
       <button
