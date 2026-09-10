@@ -1,0 +1,24 @@
+.next-up {
+  margin: 0 16px 4px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--cat) 16%, var(--bg-raised));
+  border: 1px solid color-mix(in srgb, var(--cat) 45%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.next-up-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--cat);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.next-up-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+}

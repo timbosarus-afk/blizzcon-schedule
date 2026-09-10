@@ -1,0 +1,42 @@
+.notify-setup {
+  margin: 12px 16px 0;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.notify-prompt {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.notify-prompt button {
+  background: var(--accent);
+  color: #14100a;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.notify-ok {
+  background: rgba(62, 140, 209, 0.12);
+  border: 1px solid rgba(62, 140, 209, 0.35);
+  color: var(--text-muted);
+}
+
+.notify-warn {
+  background: rgba(212, 43, 56, 0.12);
+  border: 1px solid rgba(212, 43, 56, 0.35);
+  color: #F0D8D8;
+}
