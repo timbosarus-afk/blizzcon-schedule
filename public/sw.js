@@ -16,8 +16,8 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body,
-    icon: '/icon.svg',
-    badge: '/icon.svg',
+    icon: '/IMG_5971.png',
+    badge: '/IMG_5971.png',
     tag: data.tag || 'blizzcon-reminder',
     data: { url: data.url || '/' },
     requireInteraction: true,
