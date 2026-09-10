@@ -7,7 +7,7 @@ export default function NotifySetup({ status, subscribe }) {
   if (status === 'subscribed') {
     return (
       <div className="notify-setup notify-ok">
-        <span>🔔 Alerts on - you'll get a ping 30 min before anything you've favorited.</span>
+        <span>🔔 Alerts on - you'll get a ping 30, 15, and 5 min before anything you've favorited.</span>
       </div>
     );
   }
@@ -26,8 +26,7 @@ export default function NotifySetup({ status, subscribe }) {
   if (status === 'denied') {
     return (
       <div className="notify-setup notify-warn">
-        Notifications are blocked for this app. Enable them in your phone's notification settings to get 30-min
-        alerts.
+        Notifications are blocked for this app. Enable them in your phone's notification settings to get alerts.
       </div>
     );
   }
@@ -42,7 +41,7 @@ export default function NotifySetup({ status, subscribe }) {
 
   return (
     <div className="notify-setup notify-prompt">
-      <span>Get a ping 30 min before anything you favorite.</span>
+      <span>Get a ping 30, 15, and 5 min before anything you favorite.</span>
       <button onClick={subscribe}>Turn on alerts</button>
     </div>
   );
