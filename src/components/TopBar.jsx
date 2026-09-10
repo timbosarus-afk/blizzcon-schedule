@@ -11,10 +11,13 @@ export default function TopBar({ day, setDay, view, setView, days }) {
       <div className="topbar-row">
         <div className="view-toggle">
           <button className={view === 'schedule' ? 'active' : ''} onClick={() => setView('schedule')}>
-            Full Schedule
+            Schedule
           </button>
           <button className={view === 'mine' ? 'active' : ''} onClick={() => setView('mine')}>
-            My Schedule
+            Mine
+          </button>
+          <button className={view === 'map' ? 'active' : ''} onClick={() => setView('map')}>
+            Map
           </button>
         </div>
       </div>
